@@ -16,8 +16,8 @@ var Robot = function (ai, teamcolor, gameOptions) {
 	this.posX = 0;
 	this.posY = 0;
 
-	this.sprite = ressourceCache.get("/assets/bot-base.png");
-	this.gunSprite = ressourceCache.get("/assets/bot-gun.png");
+	this.sprite = ressourceCache.get("assets/bot-base.png");
+	this.gunSprite = ressourceCache.get("assets/bot-gun.png");
 
 	this.ai = ai;
 };
