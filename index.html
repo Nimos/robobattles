@@ -1,0 +1,53 @@
+<!DOCTYPE html5>
+<html>
+	<head>
+		<title>RoboBattles</title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="/css/style.css">
+
+		<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+	</head>
+	<body>
+
+		<div class="container">
+			<div class="row">
+				<div class="code-col">
+					<textarea id="player1" class="robotCode">
+{
+   main: function (robot, field) {
+      robot.turnRight();
+      robot.move(5);
+      robot.turnGunLeft();
+   }
+}
+					</textarea>
+				</div>
+				<div class="game-col" id="game">
+				</div>
+				<div class="code-col" id="player2">
+					<textarea id="player2" class="robotCode">
+{
+   main: function (robot, field) {
+      robot.turnLeft();
+      robot.move(1);
+      robot.turnGunLeft();
+   }
+}
+					</textarea>
+				</div>
+			</div>
+			<button onclick="startGame()">START THE GAME</button>
+		</div>
+		
+
+		<script src="js/classes/Game.js"></script>
+		<script src="js/classes/RobotInterface.js"></script>
+		<script src="js/classes/Robot.js"></script>
+		<script src="js/classes/ressourceCache.js"></script>
+		
+		<script src="js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,14 @@
+.robotCode {
+	width: 100%;
+	height: 600px;
+}
+
+.code-col {
+	float: left;
+	width: 112px;
+}
+
+.game-col {
+	float: left;
+	width: 800px;
+}
