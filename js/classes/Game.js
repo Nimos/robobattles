@@ -6,7 +6,7 @@ var Game = function (options, AIs) {
 	this.options = {
 		cWidth: 800,
 		cHeight: 600,
-		ressources: ["/assets/bot-base.png", "/assets/bot-gun.png"]
+		ressources: ["assets/bot-base.png", "assets/bot-gun.png"]
 	};
 
 	this.status = 0;
