@@ -3,14 +3,16 @@
 	Manages all game objects, the main loop and starting/stopping the game
 */
 var Game = function (options, AIs) {
+	// setting defaults
 	this.options = {
 		cWidth: 800,
 		cHeight: 600,
-		ressources: ["assets/bot-base.png", "assets/bot-gun.png"]
+		ressources: ["assets/bot-base.png", "assets/bot-gun.png"],
+		robotHitpoints: 100
 	};
 
 	this.status = 0;
-	this.robots = [];
+	this.entities = [];
 	
 
 	for (var key in options) {
@@ -37,16 +39,12 @@ Game.prototype.init = function (AIs) {
 
 	console.log("Loading Robots");
 	for (var ai in AIs) {
-		var r = new Robot(AIs[ai], 0, this.options);
-		this.robots.push(r);
-	}
-
-	console.log("Placing robots");
-	for (r in this.robots) {
+		var r = new Robot(AIs[ai], 0, this);
+		this.addObject(r);
 		// place each robot at a random spot at least 100px away from the edges
-		this.robots[r].posX = Math.ceil((this.options.cWidth-200)*Math.random()+100);
-		this.robots[r].posY = Math.ceil((this.options.cHeight-200)*Math.random()+100);
-		console.log("Robot No.",r,"placed at", this.robots[r].posX, this.robots[r].posY);
+		r.posX = Math.ceil((this.options.cWidth-200)*Math.random()+100);
+		r.posY = Math.ceil((this.options.cHeight-200)*Math.random()+100);
+		console.log("Robot No.",ai,"placed at", r.posX, r.posY);
 	};
 
 	console.log("setting up stuff");
@@ -69,10 +67,31 @@ Game.prototype.main = function () {
 		return;
 	}
 
-	this.robots.forEach( function (r) {
-		interf = new RobotInterface(r);
-		r.ai.main(interf, {});
-	});
+	var colisionCheck = this.entities;
+	for (var x=0; x<this.entities.length; x++) {
+		obj = this.entities[x];
+		obj.main();
+		if (obj.removeme) {
+			this.entities.splice(x--, 1);
+		}
+		colisionCheck = colisionCheck.slice(1);
+		for (var y=0; y<colisionCheck.length; y++) {
+			// spherical robots in a vacuum
+			obj2 = colisionCheck[y];
+			x1 = obj.posX;
+			y1 = obj.posY;
+			hitbox1 = obj.hitbox;
+			x2 = obj2.posX;
+			y2 = obj2.posY;
+			hitbox2 = obj2.hitbox;
+
+			if (Math.sqrt( (x2-x1) * (x2-x1) + (y2-y1) * (y2-y1) ) <= hitbox1+hitbox2) {
+				//console.log("Collision between",obj,"and",obj2);
+				obj.collide(obj2);
+				obj2.collide(obj);
+			}
+		}
+	};
 
 	this.renderScene();
 	requestAnimationFrame(this.main.bind(this));
@@ -82,8 +101,12 @@ Game.prototype.renderScene = function () {
 	this.ctx.fillStyle = "#000000";
 	this.ctx.fillRect(0,0, this.options.cWidth, this.options.cHeight);
 
-	for (robot in this.robots) {
-		this.robots[robot].draw(this.ctx);
+	for (obj in this.entities) {
+		this.entities[obj].draw(this.ctx);
 	}
 	
+}
+
+Game.prototype.addObject = function (obj) {
+	if (obj) this.entities.push(obj);
 }

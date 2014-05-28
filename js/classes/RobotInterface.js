@@ -13,6 +13,11 @@ var RobotInterface = function(r) {
 	this.rotation = r.rotation;
 	this.gunRotation = r.gunRotation;
 
+	// Returns the current energy level
+	this.getEnergy = function () {
+		return robot.energy;
+	}
+
 	// Returns the current rotation of the robot in radians
 	this.getRotation = function () {
 		return robot.rotation;
@@ -53,5 +58,10 @@ var RobotInterface = function(r) {
 		robot.turnGun(0.2);
 	};
 
-
+	this.shoot = function () {
+		if (robot.energy >= robot.energyPerShot) {
+			robot.shoot();
+			robot.energy -= robot.energyPerShot;
+		}
+	}
 }
