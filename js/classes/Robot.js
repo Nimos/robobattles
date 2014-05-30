@@ -16,7 +16,7 @@ var Robot = function (ai, teamcolor, gameEngine) {
 	this.damageDealt = 20;
 	this.energyPerShot = 20;
 	// end
-
+ 
 
 	this.rotation = 0;
 	this.gunRotation = 0;
@@ -40,7 +40,7 @@ Robot.prototype.main = function () {
 	console.log("main");
 	this.energy= Math.min(this.energy+1, 100);
 	
-	interf = new RobotInterface(this);
+	interf = new RobotWrapper(this);
 	this.ai.main(interf, {});
 }
 

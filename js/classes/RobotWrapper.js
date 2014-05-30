@@ -4,8 +4,8 @@
 
 	This is the main class the player has to work with
 */
-var RobotInterface = function(r) {
-	var robot = r; // "private"
+var RobotWrapper = function(r) {
+	var robot = r; // "private" 
 
 	this.posX = r.posX;
 	this.posY = r.posY;

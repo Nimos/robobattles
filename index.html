@@ -18,9 +18,9 @@
 					<textarea id="player1" class="robotCode">
 {
    main: function (robot, field) {
-      robot.turnRight();
-      robot.move(5);
-      robot.turnGunLeft();
+      //robot.turnRight();
+      //robot.move(5);
+      //robot.turnGunLeft();
       if (this.shoot && robot.getEnergy() > 20) { 
       	robot.shoot();
       } else if (!this.shoot && robot.getEnergy() == 100) {
@@ -39,8 +39,8 @@
 					<textarea id="player2" class="robotCode">
 {
    main: function (robot, field) {
-      robot.turnLeft();
-      robot.move(1);
+      //robot.robot();
+      //turnLeft.move(1);
       //if (robot.getGunRotation() != 0) robot.turnGunLeft();
       robot.shoot();
    }
@@ -53,7 +53,7 @@
 		
 
 		<script src="js/classes/Game.js"></script>
-		<script src="js/classes/RobotInterface.js"></script>
+		<script src="js/classes/RobotWrapper.js"></script>
 		<script src="js/classes/Robot.js"></script>
 		<script src="js/classes/ressourceCache.js"></script>
 		<script src="js/classes/Projectile.js"></script>
