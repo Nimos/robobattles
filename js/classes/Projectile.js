@@ -6,8 +6,8 @@ Projectile = function (owner, x, y, direction, speed, effect, power) {
 	this.posX = x;
 	this.posY = y;
 
-	this.dirX = Math.sin(direction)*speed;
-	this.dirY = -Math.cos(direction)*speed;
+	this.dirY = Math.sin(direction)*speed;
+	this.dirX= Math.cos(direction)*speed;
 
 	this.effect = effect;
 	this.power = power;
@@ -16,7 +16,7 @@ Projectile = function (owner, x, y, direction, speed, effect, power) {
 
 	this.direction = direction;
 
-	this.immunityFrames = 10;
+	this.immunityFrames = 5;
 
 	this.move = function (x, y) {
 		if (this.posX+ x <= 800 && this.posX+ x >= 0) {this.posX+= x} else {this.remove()};
