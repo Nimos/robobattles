@@ -18,10 +18,21 @@
 					<textarea id="player1" class="robotCode">
 {
    main: function (robot, field) {
-      //robot.turnRight();
-      //robot.move(5);
-      //robot.turnGunLeft();
-      if (this.shoot && robot.getEnergy() > 20) { 
+      robot.turnRight();
+      robot.move(5);
+      var bots = field.getRobots();
+      for (var x=0; x<bots.length; x++) {
+         if (!robot.equals(bots[x])) {
+            v=[bots[x].getX()-robot.getX(), bots[x].getY()-robot.getY()];
+            a=Math.atan2(v[1], v[0]);
+         }
+  	  }
+  	  if (a > robot.getGunRotation()) {
+  	     robot.turnGunRight();
+      } else if (a < robot.getGunRotation()) {
+         robot.turnGunLeft();
+  	  } 
+  	  if (this.shoot && robot.getEnergy() > 20) { 
       	robot.shoot();
       } else if (!this.shoot && robot.getEnergy() == 100) {
       	this.shoot = true;
@@ -40,8 +51,22 @@
 {
    main: function (robot, field) {
       //robot.robot();
-      //turnLeft.move(1);
+      robot.move(1);
+      robot.turnLeft();
       //if (robot.getGunRotation() != 0) robot.turnGunLeft();
+      var bots = field.getRobots();
+      a=0;
+      for (var x=0; x<bots.length; x++) {
+      	if (!robot.equals(bots[x])) {
+           v=[bots[x].getX()-robot.getX(), bots[x].getY()-robot.getY()];
+           a=Math.atan2(v[1], v[0]);
+        }
+  	   }
+  	   if (a > robot.getGunRotation()) {
+  	       robot.turnGunRight();
+  		} else if (a < robot.getGunRotation()) {
+  			robot.turnGunLeft();
+  	    }
       robot.shoot();
    }
 }
@@ -57,6 +82,7 @@
 		<script src="js/classes/Robot.js"></script>
 		<script src="js/classes/ressourceCache.js"></script>
 		<script src="js/classes/Projectile.js"></script>
+		<script src="js/classes/GameWrapper.js"></script>
 		
 		<script src="js/main.js"></script>
 	</body>

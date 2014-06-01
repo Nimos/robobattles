@@ -34,14 +34,16 @@ var Robot = function (ai, teamcolor, gameEngine) {
 	this.energy = 100;
 
 	this.hitbox = 16;
+
+	this.wrapper = new RobotWrapper(this);
+	this.readOnlyWrapper = new RobotWrapper(this, true);
 };
 
 Robot.prototype.main = function () {
-	console.log("main");
 	this.energy= Math.min(this.energy+1, 100);
 	
-	interf = new RobotWrapper(this);
-	this.ai.main(interf, {});
+	 
+	this.ai.main(this.wrapper, this.gameEngine.wrapper);
 }
 
 Robot.prototype.draw = function (ctx) {
