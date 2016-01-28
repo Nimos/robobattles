@@ -4,14 +4,8 @@
 
 	This is the main class the player has to work with
 */
-var RobotInterface = function(r) {
-	var robot = r; // "private"
-
-	this.posX = r.posX;
-	this.posY = r.posY;
-
-	this.rotation = r.rotation;
-	this.gunRotation = r.gunRotation;
+var RobotWrapper = function(r, readonly) {
+	var robot = r; // "private" 
 
 	// Returns the current energy level
 	this.getEnergy = function () {
@@ -28,6 +22,26 @@ var RobotInterface = function(r) {
 		return robot.gunRotation;
 	}
 
+	// returns the X position
+	this.getX = function () {
+		return robot.posX;
+	}
+
+	// returns the Y position
+	this.getY = function () {
+		return robot.posY;
+	}
+
+	// true if both wrappers wrap the same robot
+	this.equals = function (wrapper) {
+		return wrapper._equals(robot);
+	}
+	this._equals = function (robot2) {
+		return robot == robot2;
+	}
+
+
+	if (readonly) return;
 	// Moves the robot *distance* px forward, up to the robot's maximum speed
 	this.move = function (distance) {
 		if (distance > 0) {

@@ -67,6 +67,9 @@ Game.prototype.main = function () {
 		return;
 	}
 
+	
+	this.wrapper = new GameWrapper(this);
+
 	var colisionCheck = this.entities;
 	for (var x=0; x<this.entities.length; x++) {
 		obj = this.entities[x];
